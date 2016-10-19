@@ -1,34 +1,20 @@
 package com.cidic.sdx.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import java.util.List;
 
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-
-@Entity
-@Table(name="sdx_user")
-@Cache(usage=CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class UserModel {
-
-	@Id
-	@GeneratedValue
-	private Integer id;
-	
-	@Column
+	private int id;
 	private String username;
-	
-	@Column
 	private String password;
+	private String slot;
+	private boolean locked;
+	private List<Integer> roleList;
 
-	public Integer getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -47,6 +33,32 @@ public class UserModel {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
-	
+
+	public String getSlot() {
+		return slot;
+	}
+
+	public void setSlot(String slot) {
+		this.slot = slot;
+	}
+
+	public boolean isLocked() {
+		return locked;
+	}
+
+	public void setLocked(boolean locked) {
+		this.locked = locked;
+	}
+
+	public List<Integer> getRoleList() {
+		return roleList;
+	}
+
+	public void setRoleList(List<Integer> roleList) {
+		this.roleList = roleList;
+	}
+
+	public String getCredentialsSalt() {
+		return username + slot;
+	}
 }
